@@ -1,15 +1,16 @@
 .list {
   list-style: none;
-  padding: 0;
+  padding: 4px;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
 .item {
   display: flex;
-  align-items: flex-start;
+  align-items: left;
   gap: 16px;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -34,6 +35,7 @@
   margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
+  width: 160px;
 }
 
 .year {

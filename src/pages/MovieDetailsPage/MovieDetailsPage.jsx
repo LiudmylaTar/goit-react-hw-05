@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import css from "./MovieDetailsPage.module.css";
 import { NavLink, useParams, Outlet } from "react-router-dom";
-import axios from "axios";
-import MoviseDetail from "../../components/MovieDetails/MovieDetails";
 
+import MovieDetail from "../../components/MovieDetails/MovieDetails";
+
+import { fetchDetailsFilm } from "../../movies-api";
 const options = {
   headers: {
     accept: "application/json",
@@ -14,22 +15,31 @@ const MovieDetailsPage = () => {
   const { filmId } = useParams();
   const [film, setFilm] = useState(null);
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${filmId}?language=en-US`,
-        options
-      )
-      .then((res) => setFilm(res.data));
+    fetchDetailsFilm(filmId).then((film) => setFilm(film));
   }, [filmId]);
   return (
-    <div>
-      {film && <MoviseDetail film={film} />}
-      <ul>
+    <div className={css.wrapper}>
+      {film && <MovieDetail film={film} />}
+      <ul className={css.nav_list}>
         <li>
-          <NavLink to="cast">Cast list</NavLink>
+          <NavLink
+            to="cast"
+            className={({ isActive }) =>
+              isActive ? `${css.nav_link} ${css.active}` : css.nav_link
+            }
+          >
+            Cast list
+          </NavLink>
         </li>
         <li>
-          <NavLink to="reviews">Reviews</NavLink>
+          <NavLink
+            to="reviews"
+            className={({ isActive }) =>
+              isActive ? `${css.nav_link} ${css.active}` : css.nav_link
+            }
+          >
+            Reviews
+          </NavLink>
         </li>
       </ul>
       <Outlet />
