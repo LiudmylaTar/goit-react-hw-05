@@ -7,8 +7,7 @@ import MoviseDetail from "../../components/MovieDetails/MovieDetails";
 const options = {
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzlkYzYwOTVkNjgzMDExZWRhMDdlNWRhMDA2YWE4MCIsIm5iZiI6MTc0NzExODQ0Mi40NzQsInN1YiI6IjY4MjJlOTZhNzNiMzVhMDcxMDdlODE2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uV8mbGkCYQRGm6_nLyMYoQ8DmN36gNJNk_8VReaA58A",
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
   },
 };
 const MovieDetailsPage = () => {
