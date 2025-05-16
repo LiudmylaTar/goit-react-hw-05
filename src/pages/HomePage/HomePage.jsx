@@ -1,22 +1,32 @@
 import { useEffect, useState } from "react";
-import MoviseList from "../../components/MovieList/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 import { fetchFilmList } from "../../movies-api";
+import Loader from "../../components/Loader/Loader";
 
 export default function HomePage() {
   const [films, setFilms] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
+    setIsError(false);
     fetchFilmList()
-      .then((films) => {
-        setFilms(films);
+      .then((data) => {
+        setFilms(data);
+        setIsError(false);
       })
       .catch((error) => {
-        console.error(error);
-      });
+        setIsError(true);
+      })
+      .finally(() => setLoading(false));
   }, []);
   return (
     <div>
-      <h2>What see now</h2>
-      <MoviseList films={films} />
+      <h2>Top Trending Movies</h2>
+      {isLoading && <Loader loading={isLoading} />}
+      {!isLoading && isError && <p>Something went wrong, try again later</p>}
+      {films.length > 0 && <MovieList films={films} />}
     </div>
   );
 }

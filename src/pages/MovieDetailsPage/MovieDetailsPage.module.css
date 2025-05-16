@@ -18,6 +18,6 @@
 }
 
 .nav_link.active {
-  color: #007bff;
+  color: orangered;
   text-decoration: underline;
 }

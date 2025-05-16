@@ -1,7 +1,8 @@
 import css from "./MovieList.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function MoviseList({ films }) {
+export default function MovieList({ films }) {
+  const location = useLocation();
   return (
     <ul className={css.list}>
       {films.map((film) => (
@@ -18,7 +19,11 @@ export default function MoviseList({ films }) {
           <div className={css.info}>
             <h3 className={css.title}>{film.title}</h3>
             <p className={css.year}>Rating: {film.vote_average.toFixed(1)}</p>
-            <Link to={`/movies/${film.id}`} className={css.link}>
+            <Link
+              to={`/movies/${film.id}`}
+              state={{ from: location }}
+              className={css.link}
+            >
               Read more
             </Link>
           </div>

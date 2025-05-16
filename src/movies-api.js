@@ -38,3 +38,11 @@ export const fetchCast = async (filmId) => {
   );
   return res.data.cast;
 };
+
+export const fetchFilmSearcht = async (query) => {
+  const res = await axios.get("https://api.themoviedb.org/3/search/movie", {
+    ...options,
+    params: { query: query, include_adult: false, language: "en-US", page: 1 },
+  });
+  return res.data.results;
+};
